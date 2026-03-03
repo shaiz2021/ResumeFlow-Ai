@@ -38,7 +38,7 @@ const Footer = () => {
             <h4 className="text-sm font-semibold text-primary-foreground mb-4">Company</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/about" className="hover:text-primary-foreground transition-colors">About Us</Link></li>
-              <li><a href="mailto:hello@resumeflow.ai" className="hover:text-primary-foreground transition-colors">Contact</a></li>
+              <li><a href="mailto:hello@resume-flow-ai-one.vercel.app" className="hover:text-primary-foreground transition-colors">Contact</a></li>
               <li><Link to="/privacy" className="hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>
               <li><Link to="/terms" className="hover:text-primary-foreground transition-colors">Terms of Service</Link></li>
             </ul>

@@ -66,7 +66,7 @@ const Privacy = () => {
 
             <section>
               <h2 className="text-lg font-bold text-foreground mb-3">6. Contact</h2>
-              <p>For privacy-related questions, contact us at <a href="mailto:hello@resumeflow.ai" className="text-primary hover:underline">hello@resumeflow.ai</a>.</p>
+              <p>For privacy-related questions, contact us at <a href="mailto:hello@resume-flow-ai-one.vercel.app" className="text-primary hover:underline">hello@resume-flow-ai-one.vercel.app</a>.</p>
             </section>
           </div>
         </div>

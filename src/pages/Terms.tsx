@@ -67,7 +67,7 @@ const Terms = () => {
 
             <section>
               <h2 className="text-lg font-bold text-foreground mb-3">7. Contact</h2>
-              <p>For questions about these terms, contact us at <a href="mailto:hello@resumeflow.ai" className="text-primary hover:underline">hello@resumeflow.ai</a>.</p>
+              <p>For questions about these terms, contact us at <a href="mailto:hello@resume-flow-ai-one.vercel.app" className="text-primary hover:underline">hello@resume-flow-ai-one.vercel.app</a>.</p>
             </section>
           </div>
         </div>
