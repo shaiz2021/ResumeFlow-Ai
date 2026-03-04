@@ -33,47 +33,42 @@ serve(async (req: Request) => {
       throw new Error("Unknown action: " + action);
     }
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${RESUME_API_KEY}`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${RESUME_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
+        contents: [
+          {
+            role: "user",
+            parts: [
+              { text: `${systemPrompt}\n\n${userPrompt}` }
+            ]
+          }
         ],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 1000,
+        }
       }),
     });
 
     if (!response.ok) {
-      if (response.status === 429) {
-        return new Response(JSON.stringify({ error: "AI rate limit exceeded. Please try again in a moment." }), {
-          status: 429,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
-      if (response.status === 402) {
-        return new Response(JSON.stringify({ error: "AI usage limit reached. Please try again later." }), {
-          status: 402,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
-      const t = await response.text();
-      console.error("AI gateway error:", response.status, t);
-      throw new Error("AI gateway error");
+      const errorData = await response.json();
+      console.error("Gemini API error:", response.status, errorData);
+      throw new Error(`AI service error: ${errorData.error?.message || response.statusText}`);
     }
 
     const result = await response.json();
-    if (!result.choices || !result.choices[0] || !result.choices[0].message) {
-      console.error("Unexpected AI gateway response structure:", result);
+    const content = result.candidates?.[0]?.content?.parts?.[0]?.text || "";
+
+    if (!content) {
+      console.error("Unexpected Gemini API response structure:", result);
       throw new Error("Invalid response from AI service");
     }
-    const content = result.choices[0].message.content || "";
 
-    return new Response(JSON.stringify({ result: content }), {
+    return new Response(JSON.stringify({ result: content.trim() }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
