@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://resume-flow-ai-one.vercel.app/
+**URL**: https://resumeflowai.quesiono.com/
 
 ## How can I edit this code?
 
@@ -10,7 +10,7 @@ There are several ways of editing your application.
 
 **Visit the Live Site**
 
-Simply visit [ResumeFlow AI](https://resume-flow-ai-one.vercel.app/) to start building your resume.
+Simply visit [ResumeFlow AI](https://resumeflowai.quesiono.com/) to start building your resume.
 
 **Use your preferred IDE**
 

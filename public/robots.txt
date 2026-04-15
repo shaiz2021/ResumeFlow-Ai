@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://resume-flow-ai-one.vercel.app/sitemap.xml
+Sitemap: https://resumeflowai.quesiono.com/sitemap.xml

@@ -105,8 +105,8 @@ const About = () => {
             <p className="text-muted-foreground mb-6">
               Have questions, feedback, or partnership ideas? We'd love to hear from you.
             </p>
-            <a href="mailto:hello@resume-flow-ai-one.vercel.app" className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
-              <Mail className="w-4 h-4" /> hello@resume-flow-ai-one.vercel.app
+            <a href="mailto:hello@resumeflowai.quesiono.com" className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
+              <Mail className="w-4 h-4" /> hello@resumeflowai.quesiono.com
             </a>
           </motion.section>
 
