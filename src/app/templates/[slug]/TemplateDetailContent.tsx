@@ -1,26 +1,15 @@
-import { useParams, Link, Navigate } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { getTemplateBySlug, templates } from "@/data/templates";
+import { templates } from "@/data/templates";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, ArrowLeft } from "lucide-react";
-import { useEffect } from "react";
 
-const TemplateDetail = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const template = slug ? getTemplateBySlug(slug) : undefined;
-
-  useEffect(() => {
-    if (template) {
-      document.title = `${template.name} Resume Template - Free Download | ResumeFlow AI`;
-    }
-    window.scrollTo(0, 0);
-  }, [template]);
-
-  if (!template) return <Navigate to="/templates" replace />;
-
+const TemplateDetailContent = ({ template }: { template: any }) => {
   const related = templates.filter(t => t.slug !== template.slug).slice(0, 3);
 
   return (
@@ -29,9 +18,9 @@ const TemplateDetail = () => {
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <nav className="text-sm text-muted-foreground mb-8">
-            <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
             <span className="mx-2">/</span>
-            <Link to="/templates" className="hover:text-foreground transition-colors">Templates</Link>
+            <Link href="/templates" className="hover:text-foreground transition-colors">Templates</Link>
             <span className="mx-2">/</span>
             <span className="text-foreground">{template.name}</span>
           </nav>
@@ -92,64 +81,51 @@ const TemplateDetail = () => {
                 {template.description}
               </p>
 
-              <Link to="/builder">
+              <Link href="/builder">
                 <Button size="lg" className="gradient-primary text-primary-foreground border-0 shadow-elevated text-base px-8 py-6 rounded-xl w-full sm:w-auto mb-8">
                   Use This Template →
                 </Button>
               </Link>
 
-              <div className="mb-8">
-                <h3 className="text-sm font-semibold text-foreground mb-3">Best For</h3>
-                <div className="flex flex-wrap gap-2">
-                  {template.industries.map(ind => (
-                    <Badge key={ind} variant="outline" className="text-xs">{ind}</Badge>
+              <div className="space-y-4">
+                <h3 className="font-bold text-foreground">Why choose this template?</h3>
+                <ul className="space-y-3">
+                  {[
+                    "100% ATS-friendly structure",
+                    "Professional typography & spacing",
+                    "Customizable for any industry",
+                    "Free download in PDF & Word",
+                  ].map((feat) => (
+                    <li key={feat} className="flex items-center gap-3 text-sm text-muted-foreground">
+                      <CheckCircle className="w-4 h-4 text-accent" />
+                      {feat}
+                    </li>
                   ))}
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-sm font-semibold text-foreground mb-3">Features</h3>
-                <div className="space-y-2">
-                  {template.features.map(f => (
-                    <div key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CheckCircle className="w-4 h-4 text-accent shrink-0" />
-                      {f}
-                    </div>
-                  ))}
-                </div>
+                </ul>
               </div>
             </motion.div>
           </div>
 
-          {/* Related */}
-          <div className="mt-20 max-w-5xl mx-auto">
-            <h2 className="text-xl font-bold text-foreground mb-6">More Templates</h2>
-            <div className="grid sm:grid-cols-3 gap-6">
-              {related.map(t => (
-                <Link key={t.slug} to={`/templates/${t.slug}`} className="group rounded-xl border border-border/50 bg-card overflow-hidden hover-lift">
-                  <div className="aspect-[8.5/11] bg-muted/50 p-5">
-                    <div className="space-y-2">
-                      <div className="h-3 w-24 rounded bg-foreground/10" />
-                      <div className="h-1.5 w-36 rounded bg-muted-foreground/10" />
-                      <div className="border-t border-border/30 mt-3 pt-3 space-y-1.5">
-                        <div className="h-2 w-16 rounded bg-primary/15" />
-                        <div className="h-1.5 w-full rounded bg-muted-foreground/8" />
-                        <div className="h-1.5 w-4/5 rounded bg-muted-foreground/8" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-3 flex items-center justify-between">
-                    <span className="text-sm font-semibold text-foreground">{t.name}</span>
-                    <span className="text-xs text-accent font-medium">ATS {t.score}%</span>
+          <div className="mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-8 text-center">Other Templates You Might Like</h2>
+            <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {related.map((t) => (
+                <Link key={t.slug} href={`/templates/${t.slug}`} className="group block h-full">
+                  <div className="p-4 rounded-xl border border-border/50 bg-card hover-lift h-full text-center">
+                    <h4 className="font-bold text-foreground group-hover:text-primary transition-colors mb-1">{t.name}</h4>
+                    <span className="text-xs text-muted-foreground">{t.style}</span>
                   </div>
                 </Link>
               ))}
             </div>
+            <div className="text-center mt-10">
+              <Link href="/templates">
+                <Button variant="outline" className="gap-2">
+                  <ArrowLeft className="w-4 h-4" /> All Templates
+                </Button>
+              </Link>
+            </div>
           </div>
-
-          <Link to="/templates" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mt-8 transition-colors">
-            <ArrowLeft className="w-4 h-4" /> All Templates
-          </Link>
         </div>
       </main>
       <Footer />
@@ -157,4 +133,4 @@ const TemplateDetail = () => {
   );
 };
 
-export default TemplateDetail;
+export default TemplateDetailContent;

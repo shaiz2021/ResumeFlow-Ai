@@ -1,23 +1,20 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { templates } from "@/data/templates";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import TemplatePreview from "@/components/landing/TemplatePreview";
-import { useEffect } from "react";
 
-const Templates = () => {
-  useEffect(() => {
-    document.title = "Free Resume Templates | ATS-Optimized | ResumeFlow AI";
-  }, []);
-
+const TemplatesContent = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <nav className="text-sm text-muted-foreground mb-8">
-            <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-foreground">Templates</span>
           </nav>
@@ -44,7 +41,7 @@ const Templates = () => {
                 transition={{ delay: i * 0.05 }}
               >
                 <Link
-                  to={`/templates/${t.slug}`}
+                  href={`/templates/${t.slug}`}
                   className="group block rounded-xl border border-border/50 bg-card overflow-hidden hover-lift"
                 >
                   <div className="aspect-[8.5/11] bg-muted/50 p-6 relative">
@@ -75,4 +72,4 @@ const Templates = () => {
   );
 };
 
-export default Templates;
+export default TemplatesContent;

@@ -1,5 +1,8 @@
+"use client";
+
 import { useState, useEffect, useCallback } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { ResumeData, defaultResume, Experience, Education } from "@/types/resume";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,24 +30,28 @@ const STEPS = [
 
 const STORAGE_KEY = "resumeflow-data";
 
-const Builder = () => {
-  const [searchParams] = useSearchParams();
+const BuilderContent = () => {
+  const searchParams = useSearchParams();
   const resumeId = searchParams.get("id");
   const { user } = useAuth();
   const { toast } = useToast();
 
   const [step, setStep] = useState(0);
-  const [data, setData] = useState<ResumeData>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : defaultResume;
-    } catch {
-      return defaultResume;
-    }
-  });
+  const [data, setData] = useState<ResumeData>(defaultResume);
+  
   const [skillInput, setSkillInput] = useState("");
   const [aiLoading, setAiLoading] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+
+  // Initialize from local storage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) setData(JSON.parse(saved));
+    } catch (e) {
+      console.error("Failed to load from local storage", e);
+    }
+  }, []);
 
   // Load from cloud if resumeId
   useEffect(() => {
@@ -247,7 +254,7 @@ const Builder = () => {
       {/* Top bar */}
       <header className="bg-card border-b border-border/50 sticky top-0 z-40">
         <div className="container mx-auto px-4 h-14 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <Link href="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back
           </Link>
           <div className="flex items-center gap-3">
@@ -620,4 +627,4 @@ const Builder = () => {
   );
 };
 
-export default Builder;
+export default BuilderContent;

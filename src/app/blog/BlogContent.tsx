@@ -1,16 +1,13 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { blogPosts } from "@/data/blogPosts";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { ArrowRight, Clock, Tag } from "lucide-react";
-import { useEffect } from "react";
 
-const Blog = () => {
-  useEffect(() => {
-    document.title = "Resume Tips & Career Blog | ResumeFlow AI";
-  }, []);
-
+const BlogContent = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -18,7 +15,7 @@ const Blog = () => {
         <div className="container mx-auto px-4">
           {/* Breadcrumb */}
           <nav className="text-sm text-muted-foreground mb-8">
-            <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-foreground">Blog</span>
           </nav>
@@ -45,7 +42,7 @@ const Blog = () => {
                 transition={{ delay: i * 0.05 }}
               >
                 <Link
-                  to={`/blog/${post.slug}`}
+                  href={`/blog/${post.slug}`}
                   className="group block rounded-xl border border-border/50 bg-card overflow-hidden hover-lift h-full"
                 >
                   <div className="h-40 gradient-primary opacity-80 flex items-center justify-center">
@@ -89,7 +86,7 @@ const Blog = () => {
             "@type": "Blog",
             name: "ResumeFlow AI Blog",
             description: "Expert resume tips and career advice",
-            url: window.location.origin + "/blog",
+            url: "https://resumeflowai.quesiono.com/blog",
             publisher: {
               "@type": "Organization",
               name: "ResumeFlow AI",
@@ -101,4 +98,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default BlogContent;

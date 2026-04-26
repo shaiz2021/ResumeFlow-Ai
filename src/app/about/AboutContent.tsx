@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { motion } from "framer-motion";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
 import { Heart, Shield, Zap, Globe, Mail } from "lucide-react";
-import { useEffect } from "react";
 
 const values = [
   { icon: Heart, title: "Free Access", desc: "Professional resume tools shouldn't cost $30/month. Our core features are free — forever." },
@@ -13,11 +14,7 @@ const values = [
   { icon: Globe, title: "For Everyone", desc: "Whether you're a student or an executive, our tools adapt to your career stage." },
 ];
 
-const About = () => {
-  useEffect(() => {
-    document.title = "About Us | ResumeFlow AI - Free AI Resume Builder";
-  }, []);
-
+const AboutContent = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -25,7 +22,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           {/* Breadcrumb */}
           <nav className="text-sm text-muted-foreground mb-8">
-            <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-foreground">About</span>
           </nav>
@@ -99,25 +96,18 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-2xl mx-auto text-center mb-16"
+            className="text-center bg-muted/30 rounded-3xl py-16 px-6 max-w-4xl mx-auto"
           >
-            <h2 className="text-2xl font-bold text-foreground mb-4">Get in Touch</h2>
-            <p className="text-muted-foreground mb-6">
-              Have questions, feedback, or partnership ideas? We'd love to hear from you.
-            </p>
-            <a href="mailto:hello@resumeflowai.quesiono.com" className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
-              <Mail className="w-4 h-4" /> hello@resumeflowai.quesiono.com
-            </a>
+            <h2 className="text-2xl font-bold text-foreground mb-4">Questions? We're Here to Help</h2>
+            <p className="text-muted-foreground mb-8">We're always looking for feedback to improve our tools.</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="mailto:hello@resumeflowai.quesiono.com">
+                <Button size="lg" className="gradient-primary text-primary-foreground border-0 px-8 py-6 rounded-xl shadow-soft">
+                  <Mail className="w-4 h-4 mr-2" /> hello@resumeflowai.quesiono.com
+                </Button>
+              </a>
+            </div>
           </motion.section>
-
-          {/* CTA */}
-          <div className="text-center">
-            <Link to="/builder">
-              <Button size="lg" className="gradient-primary text-primary-foreground border-0 shadow-elevated text-base px-8 py-6 rounded-xl">
-                Build My Resume Free →
-              </Button>
-            </Link>
-          </div>
         </div>
       </main>
       <Footer />
@@ -125,4 +115,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutContent;

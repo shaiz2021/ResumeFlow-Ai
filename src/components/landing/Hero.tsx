@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Sparkles, Shield } from "lucide-react";
@@ -48,16 +50,16 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
           >
-            <Link to="/builder">
+            <Link href="/builder">
               <Button size="lg" className="gradient-primary text-primary-foreground border-0 shadow-elevated text-base px-8 py-6 rounded-xl hover:opacity-90 transition-opacity animate-pulse-glow">
                 Build My Resume Free →
               </Button>
             </Link>
-            <a href="#templates">
+            <Link href="#templates">
               <Button size="lg" variant="outline" className="text-base px-8 py-6 rounded-xl border-border hover:bg-muted transition-colors">
                 View Templates
               </Button>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Trust badges */}
@@ -98,6 +100,7 @@ const Hero = () => {
               {/* Editor side */}
               <div className="p-6 border-r border-border/30">
                 <div className="space-y-4">
+
                   <div className="h-3 w-24 rounded bg-primary/20" />
                   <div className="space-y-2">
                     <div className="h-8 rounded-lg bg-muted border border-border/50" />

@@ -1,5 +1,7 @@
+"use client";
+
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { templates } from "@/data/templates";
 import TemplatePreview from "@/components/landing/TemplatePreview";
 
@@ -28,7 +30,7 @@ const TemplateShowcase = () => {
               transition={{ delay: i * 0.08 }}
             >
               <Link
-                to={`/templates/${t.slug}`}
+                href={`/templates/${t.slug}`}
                 className="group block rounded-xl border border-border/50 bg-card overflow-hidden hover-lift cursor-pointer"
               >
                 <div className="aspect-[8.5/11] bg-muted/50 p-6 relative">
@@ -54,7 +56,7 @@ const TemplateShowcase = () => {
         </div>
 
         <div className="text-center mt-10">
-          <Link to="/templates" className="text-sm font-medium text-primary hover:underline">
+          <Link href="/templates" className="text-sm font-medium text-primary hover:underline">
             View All Templates →
           </Link>
         </div>
@@ -64,3 +66,4 @@ const TemplateShowcase = () => {
 };
 
 export default TemplateShowcase;
+

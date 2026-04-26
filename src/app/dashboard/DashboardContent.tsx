@@ -1,5 +1,8 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -14,16 +17,16 @@ interface ResumeRow {
   updated_at: string;
 }
 
-const Dashboard = () => {
+const DashboardContent = () => {
   const { user, loading: authLoading, signOut } = useAuth();
   const [resumes, setResumes] = useState<ResumeRow[]>([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const router = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!authLoading && !user) navigate("/auth");
-  }, [user, authLoading, navigate]);
+    if (!authLoading && !user) router.push("/auth");
+  }, [user, authLoading, router]);
 
   useEffect(() => {
     if (user) fetchResumes();
@@ -47,7 +50,7 @@ const Dashboard = () => {
     if (error) {
       toast({ title: "Error", description: error.message, variant: "destructive" });
     } else if (data) {
-      navigate(`/builder?id=${data.id}`);
+      router.push(`/builder?id=${data.id}`);
     }
   };
 
@@ -98,25 +101,29 @@ const Dashboard = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {resumes.map(r => (
                 <div key={r.id} className="rounded-xl border border-border/50 bg-card p-5 hover-lift group">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center">
-                      <FileText className="w-5 h-5 text-primary-foreground" />
+                  <Link href={`/builder?id=${r.id}`} className="block mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors">
+                      <FileText className="w-5 h-5 text-primary" />
                     </div>
-                    <button
+                    <h3 className="font-bold text-foreground truncate">{r.title}</h3>
+                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground mt-1">
+                      <Clock className="w-3 h-3" />
+                      Updated {new Date(r.updated_at).toLocaleDateString()}
+                    </div>
+                  </Link>
+                  <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                    <Link href={`/builder?id=${r.id}`}>
+                      <Button variant="ghost" size="sm" className="h-8 text-xs font-medium">Edit Resume</Button>
+                    </Link>
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       onClick={() => deleteResume(r.id)}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity text-destructive/60 hover:text-destructive"
+                      className="h-8 w-8 p-0 text-muted-foreground hover:text-destructive"
                     >
                       <Trash2 className="w-4 h-4" />
-                    </button>
+                    </Button>
                   </div>
-                  <h3 className="font-semibold text-foreground text-sm mb-1">{r.title}</h3>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground mb-4">
-                    <Clock className="w-3 h-3" />
-                    {new Date(r.updated_at).toLocaleDateString()}
-                  </div>
-                  <Link to={`/builder?id=${r.id}`}>
-                    <Button variant="outline" size="sm" className="w-full text-xs">Edit Resume</Button>
-                  </Link>
                 </div>
               ))}
             </div>
@@ -128,4 +135,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardContent;

@@ -1,27 +1,14 @@
-import { useParams, Link, Navigate } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { getPostBySlug, getRelatedPosts } from "@/data/blogPosts";
+import { getRelatedPosts } from "@/data/blogPosts";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, Tag, ArrowRight } from "lucide-react";
-import { useEffect } from "react";
 
-const BlogPost = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const post = slug ? getPostBySlug(slug) : undefined;
-
-  useEffect(() => {
-    if (post) {
-      document.title = post.metaTitle;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) metaDesc.setAttribute("content", post.metaDescription);
-    }
-    window.scrollTo(0, 0);
-  }, [post]);
-
-  if (!post) return <Navigate to="/blog" replace />;
-
+const BlogPostContent = ({ post }: { post: any }) => {
   const related = getRelatedPosts(post.slug);
 
   // Simple markdown-to-HTML (headings, bold, lists, links)
@@ -67,9 +54,9 @@ const BlogPost = () => {
         <article className="container mx-auto px-4 max-w-3xl">
           {/* Breadcrumb */}
           <nav className="text-sm text-muted-foreground mb-8">
-            <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
             <span className="mx-2">/</span>
-            <Link to="/blog" className="hover:text-foreground transition-colors">Blog</Link>
+            <Link href="/blog" className="hover:text-foreground transition-colors">Blog</Link>
             <span className="mx-2">/</span>
             <span className="text-foreground">{post.title}</span>
           </nav>
@@ -98,36 +85,30 @@ const BlogPost = () => {
             {renderContent(post.content)}
           </div>
 
-          {/* CTA */}
-          <div className="mt-12 rounded-xl gradient-primary p-8 text-center">
-            <h3 className="text-2xl font-bold text-primary-foreground mb-3">Ready to Build Your Resume?</h3>
-            <p className="text-primary-foreground/80 mb-6">Create an ATS-optimized resume in minutes with AI.</p>
-            <Link to="/builder">
-              <Button size="lg" className="bg-card text-foreground hover:bg-card/90 font-semibold px-8 py-6 rounded-xl">
-                Build My Resume Free →
-              </Button>
-            </Link>
-          </div>
+          <hr className="my-12 border-border/50" />
 
           {/* Related Posts */}
-          <div className="mt-16">
-            <h3 className="text-xl font-bold text-foreground mb-6">Related Articles</h3>
-            <div className="grid sm:grid-cols-3 gap-4">
-              {related.map(r => (
-                <Link key={r.slug} to={`/blog/${r.slug}`} className="group rounded-xl border border-border/50 bg-card p-5 hover-lift">
-                  <span className="text-xs text-primary font-medium">{r.category}</span>
-                  <h4 className="text-sm font-semibold text-foreground mt-1 group-hover:text-primary transition-colors">{r.title}</h4>
-                  <span className="inline-flex items-center gap-1 text-xs text-primary mt-3">
-                    Read <ArrowRight className="w-3 h-3" />
-                  </span>
+          <div className="mb-12">
+            <h3 className="text-xl font-bold text-foreground mb-6">Read Next</h3>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {related.map((p) => (
+                <Link key={p.slug} href={`/blog/${p.slug}`} className="group block h-full">
+                  <div className="p-5 rounded-xl border border-border/50 bg-card hover-lift h-full">
+                    <span className="text-[10px] font-bold text-primary uppercase tracking-wider mb-2 block">{p.category}</span>
+                    <h4 className="font-bold text-foreground group-hover:text-primary transition-colors leading-snug">{p.title}</h4>
+                  </div>
                 </Link>
               ))}
             </div>
           </div>
 
-          <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mt-8 transition-colors">
-            <ArrowLeft className="w-4 h-4" /> Back to all articles
-          </Link>
+          <div className="text-center">
+            <Link href="/blog">
+              <Button variant="outline" className="gap-2">
+                <ArrowLeft className="w-4 h-4" /> Back to Blog
+              </Button>
+            </Link>
+          </div>
         </article>
       </main>
       <Footer />
@@ -138,12 +119,22 @@ const BlogPost = () => {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Article",
+            "@type": "BlogPosting",
             headline: post.title,
-            description: post.metaDescription,
+            description: post.excerpt,
             datePublished: post.date,
-            author: { "@type": "Organization", name: post.author },
-            publisher: { "@type": "Organization", name: "ResumeFlow AI" },
+            author: {
+              "@type": "Organization",
+              name: "ResumeFlow AI",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "ResumeFlow AI",
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": "https://resumeflowai.quesiono.com/blog/" + post.slug,
+            },
           }),
         }}
       />
@@ -151,4 +142,4 @@ const BlogPost = () => {
   );
 };
 
-export default BlogPost;
+export default BlogPostContent;

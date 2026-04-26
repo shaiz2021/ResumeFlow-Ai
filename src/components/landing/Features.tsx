@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Target, Sparkles, FileText, BarChart3, Download, Shield } from "lucide-react";
 

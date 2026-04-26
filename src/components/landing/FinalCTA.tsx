@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
@@ -24,7 +26,7 @@ const FinalCTA = () => {
             Join thousands of job seekers who've already upgraded their resumes with AI.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/builder">
+            <Link href="/builder">
               <Button size="lg" className="bg-card text-foreground hover:bg-card/90 text-base px-8 py-6 rounded-xl shadow-elevated font-semibold">
                 Build My Resume Free →
               </Button>
@@ -37,3 +39,4 @@ const FinalCTA = () => {
 };
 
 export default FinalCTA;
+

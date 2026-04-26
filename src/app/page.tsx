@@ -8,13 +8,8 @@ import FAQ from "@/components/landing/FAQ";
 import NewsletterCTA from "@/components/landing/NewsletterCTA";
 import FinalCTA from "@/components/landing/FinalCTA";
 import Footer from "@/components/landing/Footer";
-import { useEffect } from "react";
 
-const Index = () => {
-  useEffect(() => {
-    document.title = "Free AI Resume Builder | ATS-Optimized Templates | ResumeFlow AI";
-  }, []);
-
+export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -61,6 +56,4 @@ const Index = () => {
       />
     </div>
   );
-};
-
-export default Index;
+}

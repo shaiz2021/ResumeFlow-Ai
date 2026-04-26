@@ -1,21 +1,21 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 
-const Terms = () => {
-  useEffect(() => {
-    document.title = "Terms of Service | ResumeFlow AI";
-    window.scrollTo(0, 0);
-  }, []);
+export const metadata: Metadata = {
+  title: "Terms of Service | ResumeFlow AI",
+  description: "Read our terms of service to understand your rights and responsibilities when using ResumeFlow AI.",
+};
 
+export default function TermsPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4 max-w-3xl">
           <nav className="text-sm text-muted-foreground mb-8">
-            <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-foreground">Terms of Service</span>
           </nav>
@@ -75,6 +75,4 @@ const Terms = () => {
       <Footer />
     </div>
   );
-};
-
-export default Terms;
+}
