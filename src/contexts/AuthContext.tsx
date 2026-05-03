@@ -38,12 +38,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const signUp = async (email: string, password: string, fullName: string) => {
     console.log("Attempting sign up for:", email);
+    const redirectUrl = typeof window !== "undefined" 
+      ? `${window.location.origin}/auth`
+      : "https://resumeflowai.quesiono.com/auth";
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: { full_name: fullName },
-        emailRedirectTo: window.location.origin,
+        emailRedirectTo: redirectUrl,
       },
     });
     

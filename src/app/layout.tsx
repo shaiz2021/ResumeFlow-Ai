@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   description: "Create professional resumes in minutes with AI. Beat ATS systems, land more interviews. 100% free, no account required. 50+ templates.",
   keywords: ["free resume builder", "AI resume", "ATS resume", "resume maker", "CV builder", "professional resume template"],
   authors: [{ name: "ResumeFlow AI" }],
-  metadataBase: new URL("https://resume-flow-ai-one.vercel.app/"),
+  metadataBase: new URL("https://resumeflowai.quesiono.com/"),
   alternates: {
     canonical: "/",
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: "Free AI Resume Builder | ResumeFlow AI",
     description: "Build ATS-optimized resumes for free with AI. No account required. 50+ professional templates.",
     type: "website",
-    url: "https://resume-flow-ai-one.vercel.app/",
+    url: "https://resumeflowai.quesiono.com/",
     siteName: "ResumeFlow AI",
   },
   twitter: {
