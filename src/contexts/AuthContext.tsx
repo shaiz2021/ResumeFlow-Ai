@@ -37,7 +37,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const signUp = async (email: string, password: string, fullName: string) => {
-    const { error } = await supabase.auth.signUp({
+    console.log("Attempting sign up for:", email);
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -45,11 +46,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         emailRedirectTo: window.location.origin,
       },
     });
+    
+    if (error) {
+      console.error("Supabase SignUp Error:", error.status, error.message);
+    } else {
+      console.log("Supabase SignUp Success:", data.user?.id);
+    }
+    
     return { error };
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    console.log("Attempting sign in for:", email);
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    
+    if (error) {
+      console.error("Supabase SignIn Error:", error.status, error.message);
+      if (error.message === "Invalid login credentials") {
+        console.warn("Hint: This error often happens if the account was created on a different Supabase project before migration.");
+      }
+    } else {
+      console.log("Supabase SignIn Success:", data.user?.id);
+    }
+    
     return { error };
   };
 

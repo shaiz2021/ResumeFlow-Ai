@@ -31,14 +31,22 @@ const AuthContent = () => {
     if (isLogin) {
       const { error } = await signIn(email, password);
       if (error) {
-        toast({ title: "Login failed", description: error.message, variant: "destructive" });
+        let description = error.message;
+        if (error.message === "Invalid login credentials") {
+          description = "Incorrect email or password. If you had an account before the migration, you need to sign up again.";
+        }
+        toast({ title: "Login failed", description, variant: "destructive" });
       }
     } else {
       const { error } = await signUp(email, password, fullName);
       if (error) {
-        toast({ title: "Signup failed", description: error.message, variant: "destructive" });
+        let description = error.message;
+        if (error.message.includes("Email rate limit exceeded")) {
+          description = "We've sent too many emails recently. Please wait an hour or check your spam folder.";
+        }
+        toast({ title: "Signup failed", description, variant: "destructive" });
       } else {
-        toast({ title: "Check your email", description: "We sent a confirmation link to verify your account." });
+        toast({ title: "Check your email", description: "We sent a confirmation link to verify your account. Please check your spam folder if you don't see it." });
       }
     }
     setLoading(false);
