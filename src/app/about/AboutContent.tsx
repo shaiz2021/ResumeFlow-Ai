@@ -101,9 +101,9 @@ const AboutContent = () => {
             <h2 className="text-2xl font-bold text-foreground mb-4">Questions? We're Here to Help</h2>
             <p className="text-muted-foreground mb-8">We're always looking for feedback to improve our tools.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="mailto:hello@resumeflowai.quesiono.com">
+              <a href="mailto:hello@resumeflowai.xyz">
                 <Button size="lg" className="gradient-primary text-primary-foreground border-0 px-8 py-6 rounded-xl shadow-soft">
-                  <Mail className="w-4 h-4 mr-2" /> hello@resumeflowai.quesiono.com
+                  <Mail className="w-4 h-4 mr-2" /> hello@resumeflowai.xyz
                 </Button>
               </a>
             </div>

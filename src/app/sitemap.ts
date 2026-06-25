@@ -3,7 +3,7 @@ import { blogPosts } from "@/data/blogPosts";
 import { templates } from "@/data/templates";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://resumeflowai.quesiono.com";
+  const baseUrl = "https://resumeflowai.xyz";
 
   // Static routes
   const staticRoutes = [

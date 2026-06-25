@@ -67,7 +67,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-lg font-bold text-foreground mb-3">7. Contact</h2>
-              <p>For questions about these terms, contact us at <a href="mailto:hello@resumeflowai.quesiono.com" className="text-primary hover:underline">hello@resumeflowai.quesiono.com</a>.</p>
+              <p>For questions about these terms, contact us at <a href="mailto:hello@resumeflowai.xyz" className="text-primary hover:underline">hello@resumeflowai.xyz</a>.</p>
             </section>
           </div>
         </div>

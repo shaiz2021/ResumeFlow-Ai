@@ -66,7 +66,7 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="text-lg font-bold text-foreground mb-3">6. Contact</h2>
-              <p>For privacy-related questions, contact us at <a href="mailto:hello@resumeflowai.quesiono.com" className="text-primary hover:underline">hello@resumeflowai.quesiono.com</a>.</p>
+              <p>For privacy-related questions, contact us at <a href="mailto:hello@resumeflowai.xyz" className="text-primary hover:underline">hello@resumeflowai.xyz</a>.</p>
             </section>
           </div>
         </div>

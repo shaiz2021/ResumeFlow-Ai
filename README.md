@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://resumeflowai.quesiono.com/
+**URL**: https://resumeflowai.xyz/
 
 ## How can I edit this code?
 
@@ -10,7 +10,7 @@ There are several ways of editing your application.
 
 **Visit the Live Site**
 
-Simply visit [ResumeFlow AI](https://resumeflowai.quesiono.com/) to start building your resume.
+Simply visit [ResumeFlow AI](https://resumeflowai.xyz/) to start building your resume.
 
 **Use your preferred IDE**
 

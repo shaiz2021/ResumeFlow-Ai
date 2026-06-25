@@ -4,4 +4,4 @@ Disallow: /auth
 Disallow: /dashboard
 Disallow: /builder
 
-Sitemap: https://resumeflowai.quesiono.com/sitemap.xml
+Sitemap: https://resumeflowai.xyz/sitemap.xml

@@ -86,7 +86,7 @@ const BlogContent = () => {
             "@type": "Blog",
             name: "ResumeFlow AI Blog",
             description: "Expert resume tips and career advice",
-            url: "https://resumeflowai.quesiono.com/blog",
+            url: "https://resumeflowai.xyz/blog",
             publisher: {
               "@type": "Organization",
               name: "ResumeFlow AI",

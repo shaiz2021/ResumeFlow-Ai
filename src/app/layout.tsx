@@ -27,15 +27,20 @@ export const metadata: Metadata = {
   description: "Create professional resumes in minutes with AI. Beat ATS systems, land more interviews. 100% free, no account required. 50+ templates.",
   keywords: ["free resume builder", "AI resume", "ATS resume", "resume maker", "CV builder", "professional resume template"],
   authors: [{ name: "ResumeFlow AI" }],
-  metadataBase: new URL("https://resumeflowai.quesiono.com/"),
+  metadataBase: new URL("https://resumeflowai.xyz/"),
   alternates: {
     canonical: "/",
+  },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: ["/icon.svg"],
+    apple: ["/icon.svg"],
   },
   openGraph: {
     title: "Free AI Resume Builder | ResumeFlow AI",
     description: "Build ATS-optimized resumes for free with AI. No account required. 50+ professional templates.",
     type: "website",
-    url: "https://resumeflowai.quesiono.com/",
+    url: "https://resumeflowai.xyz/",
     siteName: "ResumeFlow AI",
   },
   twitter: {

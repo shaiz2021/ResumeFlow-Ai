@@ -133,7 +133,7 @@ const BlogPostContent = ({ post }: { post: any }) => {
             },
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": "https://resumeflowai.quesiono.com/blog/" + post.slug,
+              "@id": "https://resumeflowai.xyz/blog/" + post.slug,
             },
           }),
         }}
