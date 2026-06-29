@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, Lora, Space_Mono } from "next/font/google";
+import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { Toaster as ToasterUI } from "@/components/ui/toaster";
 import Providers from "@/components/Providers";
-import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -48,6 +49,9 @@ export const metadata: Metadata = {
     title: "Free AI Resume Builder | ResumeFlow AI",
     description: "Create ATS-optimized resumes in minutes with AI. 100% free.",
   },
+  verification: {
+    google: "EO2w2fuG-d8b7rXho0sgSOP8mHCdFgwHmJyvmHPVwJo",
+  },
   robots: {
     index: true,
     follow: true,
@@ -57,7 +61,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
